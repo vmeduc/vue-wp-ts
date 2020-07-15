@@ -1,6 +1,11 @@
 <template>
     <div>
-        <h1>App page</h1>
+        <md-toolbar>
+            <span class="md-title">Title</span>
+        </md-toolbar>
+
+        <view-router></view-router>
+        
     </div>
 </template>
 
