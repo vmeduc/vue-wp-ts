@@ -7,7 +7,7 @@
         <div class="md-layout">
             <message-form :messages="messages"/>
             <div class="md-card">
-                <message-item v-for="message in messages" :key="message.text" :message="message"/>
+                <message-item v-for="message in messages" :key="message.id" :message="message" :messages="messages"/>
             </div>
         </div>
     </div>
@@ -25,13 +25,16 @@ export default {
     data() {
         return {
             messages: [
-                {text: 'hello1'},
-                {text: 'hello2'}
+
             ]
         }
     },
-    beforeCreate() {
-
+    created() {
+        this.$http.get('http://localhost:9000/messages').then(response =>
+            response.json().then(data => 
+                data.forEach(message => this.messages.push(message))
+            )
+        )
     }
 }
 </script>
@@ -42,6 +45,7 @@ export default {
         padding: 10px;
         margin: 10px;
         display: block;
+        max-width: 1000px;
     }
     .md-layout {
         margin-top: 20px;

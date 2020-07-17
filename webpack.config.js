@@ -41,5 +41,7 @@ module.exports = {
             path.join(__dirname, 'node_modules')
         ]
     },
-    plugins: [new VueLoaderPlugin()]
+    plugins: [new VueLoaderPlugin()],
+
+    devtool: 'source-map',     
 };

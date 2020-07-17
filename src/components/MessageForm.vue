@@ -19,9 +19,16 @@ export default {
     },
     methods: {
         saveMessage() {
-            let x = {text: this.$data.text}
-            this.messages.push(x)
-            this.$data.text = ''
+            if (this.$data.text === '') {
+                alert('Write message, textview is empty')
+            } else {
+                this.$http.post('http://localhost:9000/messages', {text: this.$data.text}).then(response =>
+                    response.json().then(data => {
+                        this.messages.push(data)
+                        this.$data.text = ''
+                    })
+                )    
+            }
         }
     }
 }
