@@ -17,6 +17,21 @@ module.exports = {
             {
                 test: /\.vue$/, 
                 use: 'vue-loader'
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.s[ac]ss$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
             }
 		]
     },
@@ -26,5 +41,7 @@ module.exports = {
             path.join(__dirname, 'node_modules')
         ]
     },
-    plugins: [new VueLoaderPlugin()]
+    plugins: [new VueLoaderPlugin()],
+
+    devtool: 'source-map',     
 };
