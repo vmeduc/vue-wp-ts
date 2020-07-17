@@ -7,7 +7,11 @@
         <div class="md-layout">
             <message-form :messages="messages"/>
             <div class="md-card">
-                <message-item v-for="message in messages" :key="message.id" :message="message" :messages="messages"/>
+                <message-item v-for="message in messages" 
+                    :key="message.id" 
+                    :message="message" 
+                    :messages="messages"
+                    :deleteMessage="deleteMessage"/>
             </div>
         </div>
     </div>
@@ -29,10 +33,19 @@ export default {
             ]
         }
     },
+    methods: {
+        deleteMessage(message) {
+            this.$http.delete('http://localhost:9000/messages/' + message.id).then(responce => {
+                if(responce.ok) {
+                    this.messages.splice(this.messages.indexOf(message), 1)
+                }
+            })
+        }
+    },
     created() {
         this.$http.get('http://localhost:9000/messages').then(response =>
-            response.json().then(data => 
-                data.forEach(message => this.messages.push(message))
+            response.json().then(json => 
+                json.forEach(message => this.messages.push(message))
             )
         )
     }
@@ -43,6 +56,7 @@ export default {
 
     .md-card {
         padding: 10px;
+        padding-right: 40px;
         margin: 10px;
         display: block;
         max-width: 1000px;
