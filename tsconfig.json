@@ -1,12 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "noImplicitAny": false,
-    "module": "ES2015",
-    "moduleResolution": "Node",
-    "baseUrl": ".",
-    "paths": {
-      "src/**": ["src/**"]
+    "compilerOptions": {
+        "sourceMap": true,
     }
-  }
 }
